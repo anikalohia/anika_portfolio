@@ -9,16 +9,16 @@ import { Typewriter } from 'react-simple-typewriter'
 
 export default function Hero() {
   return (
-    <section id="hero" style={{ display: "flex", height: "100vh", color: "white" }} >
+    <section id="hero" style={{ display: "flex", height: "100vh", color: "white" }} className="hero-section">
       {/* Left: Intro Text */}
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: "80px" }}>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: "80px" }} className="hero-content">
         <motion.h1 id="name" style={{ fontSize: "7rem", margin: "0" }} initial={{ opacity: 0 ,x:-50}}
           animate={{ opacity: 1,x:0 }}
           transition={{ delay: 1 }}>
           Hi, I'm <span style={{ color: "#38bdf8" }}>Anika</span>
         </motion.h1>
-        <h2 id="head"style={{ fontSize: "2rem", margin: "0px 0" }}>Software Developer | AI Enthusiast</h2>
-        <p  id="tag" style={{ maxWidth: "500px", opacity: 0.8 ,fontSize: "1.3rem"}}  >
+        <h2 id="head"style={{ fontSize: "2rem", margin: "0px 0" }} className="hero-subtitle">Software Developer | AI Enthusiast</h2>
+        <p  id="tag" style={{ maxWidth: "500px", opacity: 0.8 ,fontSize: "1.3rem"}} lassName="hero-tag" >
                <Typewriter
         words={['Welcome to my website!','Turning Ideas into Interactive Solutions' , 'Enjoy your stay ✨']}
         loop={true}
@@ -30,14 +30,14 @@ export default function Hero() {
       />
          
         </p>
-        <div style={{ display: "flex", gap: "12px", marginTop: "16px" }}>
-          <a href="#projects" style={{ padding: "12px 20px", borderRadius: "10px", background: "#38bdf8", border: "1px solid rgba(56,189,248,0.8)", color: "white", cursor: "pointer" }}>View Projects</a>
-          <a href="#contact" style={{ padding: "12px 20px", borderRadius: "10px", background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "white", cursor: "pointer" }}>Contact Me</a>
+          <div className="hero-buttons">
+          <a href="#projects" className="btn-primary">View Projects</a>
+          <a href="#contact" className="btn-secondary">Contact Me</a>
         </div>
       </div>
 
       {/* Right: 3D Model */}
-      <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <div className="hero-model" style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
         <Canvas camera={{ position: [0, 1.5, 5], fov: 55 }}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[5, 5, 5]} />

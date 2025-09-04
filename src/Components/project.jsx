@@ -1,23 +1,9 @@
 import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useTexture , Text} from "@react-three/drei";
+import { OrbitControls, useTexture } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 
-const techLogos = [
-  { node: <SiReact />, title: "React", href: "https://react.dev" },
-  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
-  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
-  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
-];
-
-
-const imageLogos = [
-  { src: "/logos/company1.png", alt: "Company 1", href: "https://company1.com" },
-  { src: "/logos/company2.png", alt: "Company 2", href: "https://company2.com" },
-  { src: "/logos/company3.png", alt: "Company 3", href: "https://company3.com" },
-];
 
 
 function RoundedPlane({ texture, rotation, project, onSelect }) {
@@ -105,11 +91,11 @@ export default function Project() {
   ];
 
   return (
-    <section id="projects" style={{ minHeight: "100vh", color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center", gap: "2rem" }}>
+    <section id="projects" className="project-section" style={{ minHeight: "100vh", color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div className="project-layout" style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center", gap: "2rem" }}>
         
         {/* 3D Canvas */}
-        <div style={{ width: "55%", height: "700px" }}>
+        <div style={{ width: "55%", height: "700px" }} className="project-canvas">
           <Canvas camera={{ position: [0, 0, 8], fov: 40 }}>
             <ambientLight intensity={0.8} />
             <directionalLight position={[5, 5, 5]} intensity={1.5} />
@@ -122,7 +108,7 @@ export default function Project() {
         </div>
 
         {/* Right side info */}
-        <div style={{ width: "40%", textAlign: "left" }} className="mx-7">
+        <div style={{ width: "40%", textAlign: "left" }} className="mx-7 project-info">
           {selectedProject ? (
             <>
               <h2 style={{ fontSize: "2.5rem", marginBottom: "1rem" }} >{selectedProject.title}</h2>

@@ -10,7 +10,9 @@ body,
   background-color: rgb(0, 0, 0);
   overflow-y: auto;
 }
-
+html {
+  font-size: 14px; /* default is usually 16px */
+}
 
 
 #name {
@@ -41,6 +43,7 @@ body {
 }
 section {
   min-height: 100vh;
+  height :auto;
   /* padding: 4rem 2rem; */
 }
 #hero{
@@ -254,11 +257,12 @@ img {
     box-sizing: border-box;
     min-height: 100vh;
     flex-direction: column;
-    padding: 3rem 1rem;
+    padding: 5rem 1rem;
     gap: 1.5rem;
   }
   .hero-content {
     order: 1;
+    margin: 4rem;
     padding-left: 0;
     max-width: 100%;
     text-align: center;
@@ -274,6 +278,7 @@ img {
   }
   .hero-subtitle {
     font-size: 1.3rem;
+    
   }
   .hero-tag {
     font-size: 1rem;
@@ -290,6 +295,7 @@ img {
   }
   .hero-model {
     margin-top: 1rem;
+    padding-bottom: 7rem;
   }
 }
 

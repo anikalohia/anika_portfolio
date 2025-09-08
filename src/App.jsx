@@ -13,7 +13,7 @@ export default function LandingPage() {
       
       <Navbar />
       
-      {/* Hero Section */}
+     
       <Hero />
       <About />
       <Skill/>

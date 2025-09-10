@@ -18,7 +18,7 @@ export default function Hero() {
           Hi, I'm <span style={{ color: "#38bdf8" }}>Anika</span>
         </motion.h1>
         <h2 id="head"style={{ fontSize: "2rem", margin: "0px 0" }} className="hero-subtitle">Software Developer | AI Enthusiast</h2>
-        <p  id="tag" style={{ maxWidth: "500px", opacity: 0.8 ,fontSize: "1.3rem"}} lassName="hero-tag" >
+        <p  id="tag" style={{ maxWidth: "500px", opacity: 0.8 ,fontSize: "1.3rem"}} className="hero-tag" >
                <Typewriter
         words={['Welcome to my website!','Turning Ideas into Interactive Solutions' , 'Enjoy your stay ✨']}
         loop={true}

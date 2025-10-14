@@ -76,15 +76,15 @@ body {
   flex-wrap: wrap;
   gap: 24px;
 }
-
-@media (max-width: 900px) {
+/* 900 */
+@media (max-width: 700px) {
   .container {
     flex-direction: column;
     gap: 16px;
   }
 }
-
-@media (max-width: 600px) {
+/* 300px */
+@media (max-width: 500px) { 
   .container {
     width: 100%;
     padding: 8px;
@@ -99,6 +99,19 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* Navbar responsive helpers */
+@media (max-width: 768px) {
+  .nav-links-desktop {
+    display: none !important;
+  }
+  .nav-burger {
+    display: inline-flex !important;
+  }
+  .nav-links-mobile {
+    display: flex !important;
+  }
 }
 
 /* ...existing code... */
@@ -153,7 +166,7 @@ img {
 }
 
 /* Responsive styles */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .about-section {
     width: 98%;
     border-radius: 40px;
@@ -196,7 +209,9 @@ img {
 /* ...existing code... */
 
 .hero-section {
-  display: "flex"; height: "100vh"; color: "white"
+  display: flex;
+  height: 100vh;
+  color: white;
 }
 .hero-content {
   flex: 1;
@@ -243,11 +258,9 @@ img {
   text-decoration: none;
 }
 .hero-model {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
 /* ...existing code... */
@@ -262,7 +275,7 @@ img {
   }
   .hero-content {
     order: 1;
-    margin: 4rem;
+    margin: 2rem 1rem 0 1rem;
     padding-left: 0;
     max-width: 100%;
     text-align: center;
@@ -340,7 +353,12 @@ img {
 /* Add to style.css */
 
 .project-section {
-  min-Height: "100vh"; color: "white"; display: "flex"; flex-direction: "column"; align-items: "center" ;padding: 4rem 2rem;
+  min-height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
 }
 .project-layout {
   display: flex;
@@ -358,7 +376,7 @@ img {
   width: 40%;
   text-align: left;
 }
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .project-layout {
     flex-direction: column;
     gap: 2rem;
@@ -369,7 +387,7 @@ img {
     min-width: 0;
   }
   .project-canvas {
-    height: 400px;
+    height: 420px;
   }
 }
 @media (max-width: 600px) {
@@ -377,7 +395,7 @@ img {
     padding: 2rem 0.5rem;
   }
   .project-canvas {
-    height: 250px;
+    height: 260px;
     width: 100%;
     
   }

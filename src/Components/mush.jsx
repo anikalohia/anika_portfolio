@@ -1,11 +1,10 @@
 import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { OrbitControls, useGLTF, Preload } from "@react-three/drei";
 
 function Model(props) {
     const group = useRef();
-    // Replace 'model.gltf' with your actual model path
-    const { scene } = useGLTF("/model/mushrooms.glb");
+    const { scene } = useGLTF("/model/mushrooms.glb", true);
 
     // Rotate the model
     useFrame(() => {
@@ -18,7 +17,8 @@ function Model(props) {
 }
 
 export default function Mush() {
-    return (
+    return <>
+        <Preload all />
         <Model/>
-    );
+    </>;
 }

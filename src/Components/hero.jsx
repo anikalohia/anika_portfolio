@@ -38,7 +38,7 @@ export default function Hero() {
 
       {/* Right: 3D Model */}
       <div className="hero-model" style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <Canvas camera={{ position: [0, 1.5, 5], fov: 55 }}>
+        <Canvas camera={{ position: [0, 1.5, 5], fov: 55 }} dpr={[1, 1.5]} gl={{ antialias: false, powerPreference: "low-power" }}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[5, 5, 5]} />
           <Model />

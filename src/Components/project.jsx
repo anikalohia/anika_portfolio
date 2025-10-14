@@ -84,10 +84,10 @@ export default function Project() {
   const [selectedProject, setSelectedProject] = React.useState(null);
 
   const projects = [
-    { img: "./pg1.jpg", url: "https://github.com/anikalohia/Blog-App-.git", title: "Project One- Blog Application", description: "Blog application built with Express.js and Blog API, featuring full CRUD functionality for creating, updating, and deleting posts." },
-    { img: "./pg2.jpg", url: "https://yourproject2.com", title: "Project Two", description: "This is my second project. Built with Python and Flask." },
-    { img: "./pg3.jpg", url: "https://yourproject3.com", title: "Project Three", description: "This is my third project. Built with Java and Spring Boot." },
-    { img: "./pg4.jpg", url: "https://yourproject4.com", title: "Project Four", description: "This is my fourth project. Built with C# and .NET." },
+    { img: "/pg1.jpg", url: "https://github.com/anikalohia/Blog-App-.git", title: "Project One- Blog Application", description: "Blog application built with Express.js and Blog API, featuring full CRUD functionality for creating, updating, and deleting posts." },
+    { img: "/pg2.jpg", url: "https://yourproject2.com", title: "Project Two", description: "This is my second project. Built with Python and Flask." },
+    { img: "/pg3.jpg", url: "https://yourproject3.com", title: "Project Three", description: "This is my third project. Built with Java and Spring Boot." },
+    { img: "/pg4.jpg", url: "https://yourproject4.com", title: "Project Four", description: "This is my fourth project. Built with C# and .NET." },
   ];
 
   return (
@@ -96,13 +96,17 @@ export default function Project() {
         
         {/* 3D Canvas */}
         <div style={{ width: "55%", height: "700px" }} className="project-canvas">
-          <Canvas camera={{ position: [0, 0, 8], fov: 40 }}>
+          <Canvas
+            camera={{ position: [0, 0, 8], fov: 40 }}
+            dpr={[1, 1.5]}
+            gl={{ antialias: false, powerPreference: "low-power" }}
+          >
             <ambientLight intensity={0.8} />
             <directionalLight position={[5, 5, 5]} intensity={1.5} />
             <ProjectCylinder projects={projects} onSelect={setSelectedProject} />  
             <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI/2} maxPolarAngle={Math.PI/2}/>
             <EffectComposer>
-              <Bloom intensity={0.7} kernelSize={3} luminanceThreshold={0.3} luminanceSaturation={0.9} />
+              <Bloom intensity={0.45} kernelSize={2} luminanceThreshold={0.4} luminanceSaturation={0.8} />
             </EffectComposer>
           </Canvas>
         </div>

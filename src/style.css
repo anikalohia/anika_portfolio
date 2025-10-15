@@ -129,7 +129,7 @@ img {
   justify-content: center;
   border-radius: 75px;
   overflow: hidden;
-  height: 100vh;
+  /* height: 100vh; */
   background: linear-gradient(to top, #090e1a, #0f213f);
 }
 

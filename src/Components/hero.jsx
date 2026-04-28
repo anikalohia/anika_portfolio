@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import React from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 import Model from "./mush";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
 import { Typewriter } from 'react-simple-typewriter'
 
@@ -11,25 +11,12 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      style={{
-        display: "flex",
-        minHeight: "100vh",
-        color: "white",
-        flexDirection: "row",
-      }}
       className="hero-section"
     >
       <div
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          paddingLeft: "80px",
-        }}
         className="hero-content"
       >
-        <motion.h1
+        <Motion.h1
           id="name"
           style={{ fontSize: "7rem", margin: "0" }}
           initial={{ opacity: 0, x: -50 }}
@@ -37,17 +24,15 @@ export default function Hero() {
           transition={{ delay: 1 }}
         >
           Hi, I'm <span style={{ color: "#38bdf8" }}>Anika</span>
-        </motion.h1>
+        </Motion.h1>
         <h2
           id="head"
-          style={{ fontSize: "2rem", margin: "0px 0" }}
           className="hero-subtitle"
         >
           Software Developer | AI Enthusiast
         </h2>
         <p
           id="tag"
-          style={{ maxWidth: "500px", opacity: 0.8, fontSize: "1.3rem" }}
           className="hero-tag"
         >
           <Typewriter
@@ -76,13 +61,6 @@ export default function Hero() {
 
       <div
         className="hero-model"
-        style={{
-          flex: 1,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minWidth: 0,
-        }}
       >
         <Canvas
           camera={{ position: [0, 1.5, 5], fov: 55 }}

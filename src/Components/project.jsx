@@ -48,6 +48,9 @@ function ProjectCylinder({ projects, onSelect }) {
   const groupRef = useRef();
   const speed = useRef(0.3);
   const targetSpeed = useRef(0.3);
+  
+  // Load all textures at once to follow hooks rules
+  const textures = useTexture(projects.map((proj) => proj.img));
 
   useFrame((_, delta) => {
     speed.current += (targetSpeed.current - speed.current) * 0.05;
@@ -63,12 +66,11 @@ function ProjectCylinder({ projects, onSelect }) {
       onPointerLeave={() => (targetSpeed.current = 0.3)}
     >
       {projects.map((proj, i) => {
-        const tex = useTexture(proj.img);
         const angle = (i / projects.length) * Math.PI * 2;
         return (
           <RoundedPlane
             key={i}
-            texture={tex}
+            texture={textures[i]}
             rotation={angle}
             project={proj}   
             onSelect={onSelect}
@@ -91,11 +93,11 @@ export default function Project() {
   ];
 
   return (
-    <section id="projects" className="project-section" style={{ minHeight: "100vh", color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <div className="project-layout" style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center", gap: "2rem" }}>
+    <section id="projects" className="project-section">
+      <div className="project-layout">
         
         {/* 3D Canvas */}
-        <div style={{ width: "55%", height: "700px" }} className="project-canvas">
+        <div className="project-canvas">
           <Canvas
             camera={{ position: [0, 0, 8], fov: 40 }}
             dpr={[1, 1.5]}
@@ -112,19 +114,19 @@ export default function Project() {
         </div>
 
         {/* Right side info */}
-        <div style={{ width: "40%", textAlign: "left" }} className="mx-7 project-info">
+        <div className="mx-7 project-info">
           {selectedProject ? (
             <>
-              <h2 style={{ fontSize: "2.5rem", marginBottom: "1rem" }} >{selectedProject.title}</h2>
-              <p style={{ fontSize: "1.2rem", color: "lightgray" }}>{selectedProject.description}</p>
+              <h2>{selectedProject.title}</h2>
+              <p>{selectedProject.description}</p>
               <a href={selectedProject.url} target="_blank" rel="noopener noreferrer" style={{ color: "#61dafb", fontWeight: "bold" }}>
                 View Project →
               </a>
             </>
           ) : (
             <>
-              <h2 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>My Projects</h2>
-              <p style={{ fontSize: "1.2rem", color: "lightgray" }}>Explore my projects by clicking the rotating cards on the left. Each card will take you directly to the live project or repository.</p>
+              <h2>My Projects</h2>
+              <p>Explore my projects by clicking the rotating cards on the left. Each card will take you directly to the live project or repository.</p>
             </>
           )}
         </div>

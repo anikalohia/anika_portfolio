@@ -87,7 +87,6 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           className="nav-burger"
           style={{
-            display: "none",
             marginLeft: "12px",
             padding: "8px 12px",
             borderRadius: "10px",
@@ -105,20 +104,6 @@ export default function Navbar() {
       {menuOpen && (
         <div
           className="nav-links-mobile"
-          style={{
-            position: "absolute",
-            top: "72px",
-            width: "min(1500px, 100%)",
-            padding: "12px 20px",
-            background: "rgba(15, 23, 42, 0.9)",
-            border: "1px solid rgba(255,255,255,0.08)",
-            borderRadius: "12px",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
-            display: "none",
-            flexDirection: "column",
-            gap: "8px"
-          }}
           onClick={() => setMenuOpen(false)}
         >
           <a href="#hero" style={linkStyle("hero")}>Home</a>

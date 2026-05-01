@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [active, setActive] = useState("hero");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const sectionIds = ["hero", "about", "projects", "contact"];
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
-
     const handleScroll = () => {
-      const probeY = window.innerHeight * 0.35; // probe a point below the top
+      setScrolled(window.scrollY > 50);
+      
+      const sectionIds = ["hero", "about", "skills", "projects", "contact"];
+      const sections = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+
+      const probeY = window.innerHeight * 0.3;
       let current = active;
       for (const el of sections) {
         const rect = el.getBoundingClientRect();
@@ -23,95 +27,95 @@ export default function Navbar() {
       if (current !== active) setActive(current);
     };
 
-    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [active]);
 
-  const linkStyle = (id) => ({
-    color: "white",
-    textDecoration: "none",
-    padding: "8px 14px",
-    borderRadius: "9999px",
-    background: active === id ? "rgba(56, 189, 248, 0.15)" : "transparent",
-    border: active === id ? "1px solid rgba(56, 189, 248, 0.35)" : "1px solid transparent",
-    transition: "all 200ms ease",
-  });
+  const navLinks = [
+    { id: "hero", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "skills", label: "Skills" },
+    { id: "projects", label: "Projects" },
+    { id: "contact", label: "Contact" },
+  ];
 
   return (
     <nav
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "16px 24px",
-        zIndex: 1000,
-      }}
+      className={`fixed top-0 left-0 w-full flex justify-center items-center py-6 px-4 z-[1000] transition-all duration-300 ${
+        scrolled ? "py-4" : "py-6"
+      }`}
     >
       <div
-        style={{
-          width: "min(1500px, 100%)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "12px 20px",
-          background: "rgba(15, 23, 42, 0.6)",
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          borderRadius: "16px",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
-        }}
+        className={`flex items-center justify-between px-6 py-3 rounded-2xl border transition-all duration-300 ${
+          scrolled 
+          ? "bg-[#030712]/80 backdrop-blur-xl border-white/10 shadow-2xl w-full max-w-4xl" 
+          : "bg-transparent border-transparent w-full max-w-6xl"
+        }`}
       >
-        <h1 id="logo" style={{ fontSize: "1.25rem", fontWeight: 700 }}>🍁Anika</h1>
+        <motion.h1 
+          id="logo" 
+          className="text-2xl font-bold tracking-tighter"
+          whileHover={{ scale: 1.05 }}
+        >
+          Anika<span className="text-sky-400">.</span>
+        </motion.h1>
 
-        {/* Desktop links */}
-        <div className="nav-links-desktop" style={{ display: "flex", gap: "10px" }}>
-          <a href="#hero" style={linkStyle("hero")}>Home</a>
-          <a href="#about" style={linkStyle("about")}>About</a>
-          <a href="#projects" style={linkStyle("projects")}>Projects</a>
-          <a href="#contact" style={linkStyle("contact")}>Contact</a>
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-2">
+          {navLinks.map((link) => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
+                active === link.id 
+                ? "text-sky-400 bg-sky-400/10" 
+                : "text-gray-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile Toggle */}
         <button
-          aria-label="Toggle menu"
           onClick={() => setMenuOpen(!menuOpen)}
-          className="nav-burger"
-          style={{
-            marginLeft: "12px",
-            padding: "8px 12px",
-            borderRadius: "10px",
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.12)",
-            color: "white",
-            cursor: "pointer"
-          }}
+          className="md:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-white"
         >
-          {menuOpen ? "✕" : "☰"}
+          {menuOpen ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          )}
         </button>
       </div>
 
-      {/* Mobile dropdown */}
-      {menuOpen && (
-        <div
-          className="nav-links-mobile"
-          onClick={() => setMenuOpen(false)}
-        >
-          <a href="#hero" style={linkStyle("hero")}>Home</a>
-          <a href="#about" style={linkStyle("about")}>About</a>
-          <a href="#projects" style={linkStyle("projects")}>Projects</a>
-          <a href="#contact" style={linkStyle("contact")}>Contact</a>
-        </div>
-      )}
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            className="fixed top-24 left-4 right-4 bg-[#030712]/95 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 shadow-2xl md:hidden flex flex-col gap-4 z-[1001]"
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={() => setMenuOpen(false)}
+                className={`text-center py-4 rounded-2xl text-lg font-semibold transition-all ${
+                  active === link.id 
+                  ? "bg-sky-400 text-gray-900" 
+                  : "text-gray-300 hover:bg-white/5"
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

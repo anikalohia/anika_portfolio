@@ -1,18 +1,16 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useTexture } from "@react-three/drei";
+import { OrbitControls, useTexture, Html } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
+import { motion, AnimatePresence } from "framer-motion";
 
-
-
-function RoundedPlane({ texture, rotation, project, onSelect }) {
+function RoundedPlane({ texture, rotation, project, onSelect, isSelected }) {
   const meshRef = useRef();
-  const [hovered, setHovered] = React.useState(false);
-
+  const [hovered, setHovered] = useState(false);
 
   const shape = new THREE.Shape();
-  const w = 2, h = 2.5, r = 0.25;
+  const w = 2, h = 2.8, r = 0.2;
   shape.moveTo(-w / 2 + r, -h / 2);
   shape.lineTo(w / 2 - r, -h / 2);
   shape.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + r);
@@ -28,42 +26,52 @@ function RoundedPlane({ texture, rotation, project, onSelect }) {
   return (
     <group
       rotation={[0, rotation, 0]}
-      position={[Math.sin(rotation) * 3, 0, Math.cos(rotation) * 3]}
-      onClick={() => onSelect(project)} 
+      position={[Math.sin(rotation) * 4, 0, Math.cos(rotation) * 4]}
+      onClick={(e) => {
+        e.stopPropagation();
+        onSelect(project);
+      }}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
-   
     >
-      <mesh ref={meshRef} scale={hovered ? 1.01 : 1}>
+      <mesh ref={meshRef} scale={hovered || isSelected ? 1.05 : 1}>
         <primitive object={geometry} />
-        <meshStandardMaterial map={texture} side={THREE.DoubleSide}
-       color={hovered ? new THREE.Color("#dddddd") : new THREE.Color("white")} />
+        <meshStandardMaterial 
+          map={texture} 
+          side={THREE.DoubleSide}
+          emissive={isSelected ? new THREE.Color("#38bdf8") : new THREE.Color("black")}
+          emissiveIntensity={isSelected ? 0.2 : 0}
+        />
       </mesh>
       
+      {(hovered || isSelected) && (
+        <Html position={[0, 1.8, 0]} center distanceFactor={10}>
+          <div className="bg-sky-500/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap shadow-xl">
+            {project.title}
+          </div>
+        </Html>
+      )}
     </group>
   );
 }
 
-function ProjectCylinder({ projects, onSelect }) {
+function ProjectCylinder({ projects, onSelect, selectedProject }) {
   const groupRef = useRef();
-  const speed = useRef(0.3);
-  const targetSpeed = useRef(0.3);
+  const [isHovered, setIsHovered] = useState(false);
   
-  // Load all textures at once to follow hooks rules
   const textures = useTexture(projects.map((proj) => proj.img));
 
-  useFrame((_, delta) => {
-    speed.current += (targetSpeed.current - speed.current) * 0.05;
-    if (groupRef.current) {
-      groupRef.current.rotation.y += delta * speed.current;
+  useFrame((state, delta) => {
+    if (!isHovered && !selectedProject) {
+      groupRef.current.rotation.y += delta * 0.2;
     }
   });
 
   return (
     <group
       ref={groupRef}
-      onPointerEnter={() => (targetSpeed.current = 0.1)}
-      onPointerLeave={() => (targetSpeed.current = 0.3)}
+      onPointerEnter={() => setIsHovered(true)}
+      onPointerLeave={() => setIsHovered(false)}
     >
       {projects.map((proj, i) => {
         const angle = (i / projects.length) * Math.PI * 2;
@@ -74,7 +82,7 @@ function ProjectCylinder({ projects, onSelect }) {
             rotation={angle}
             project={proj}   
             onSelect={onSelect}
-            
+            isSelected={selectedProject?.title === proj.title}
           />
         );
       })}
@@ -83,52 +91,134 @@ function ProjectCylinder({ projects, onSelect }) {
 }
 
 export default function Project() {
-  const [selectedProject, setSelectedProject] = React.useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const projects = [
-    { img: "/pg1.jpg", url: "https://github.com/anikalohia/Blog-App-.git", title: "Project One- Blog Application", description: "Blog application built with Express.js and Blog API, featuring full CRUD functionality for creating, updating, and deleting posts." },
-    { img: "/pg2.jpg", url: "https://yourproject2.com", title: "Project Two", description: "This is my second project. Built with Python and Flask." },
-    { img: "/pg3.jpg", url: "https://yourproject3.com", title: "Project Three", description: "This is my third project. Built with Java and Spring Boot." },
-    { img: "/pg4.jpg", url: "https://yourproject4.com", title: "Project Four", description: "This is my fourth project. Built with C# and .NET." },
+    { 
+      img: "/pg1.jpg", 
+      url: "https://github.com/anikalohia/Blog-App-.git", 
+      title: "Blog Application", 
+      tags: ["React", "Express", "Node.js"],
+      description: "A full-stack blog application with rich text editing, user authentication, and responsive design." 
+    },
+    { 
+      img: "/pg2.jpg", 
+      url: "https://yourproject2.com", 
+      title: "AI Vision", 
+      tags: ["Python", "TensorFlow", "FastAPI"],
+      description: "Real-time object detection and classification system leveraging deep learning models." 
+    },
+    { 
+      img: "/pg3.jpg", 
+      url: "https://yourproject3.com", 
+      title: "Data Pulse", 
+      tags: ["Next.js", "D3.js", "PostgreSQL"],
+      description: "Interactive data visualization dashboard for analyzing complex market trends and patterns." 
+    },
+    { 
+      img: "/pg4.jpg", 
+      url: "https://yourproject4.com", 
+      title: "Sky Connect", 
+      tags: ["React Native", "Firebase", "WebRTC"],
+      description: "Cross-platform communication app focusing on privacy and real-time collaboration." 
+    },
   ];
 
   return (
-    <section id="projects" className="project-section">
-      <div className="project-layout">
-        
-        {/* 3D Canvas */}
-        <div className="project-canvas">
-          <Canvas
-            camera={{ position: [0, 0, 8], fov: 40 }}
-            dpr={[1, 1.5]}
-            gl={{ antialias: false, powerPreference: "low-power" }}
-          >
-            <ambientLight intensity={0.8} />
-            <directionalLight position={[5, 5, 5]} intensity={1.5} />
-            <ProjectCylinder projects={projects} onSelect={setSelectedProject} />  
-            <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI/2} maxPolarAngle={Math.PI/2}/>
-            <EffectComposer>
-              <Bloom intensity={0.45} kernelSize={2} luminanceThreshold={0.4} luminanceSaturation={0.8} />
-            </EffectComposer>
-          </Canvas>
+    <section id="projects" className="min-h-screen py-24 flex flex-col items-center justify-center overflow-hidden">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            Featured <span className="text-sky-400">Works</span>
+          </h2>
+          <p className="text-gray-400">Click and drag to explore the 3D gallery. Tap a card to see details.</p>
         </div>
 
-        {/* Right side info */}
-        <div className="mx-7 project-info">
-          {selectedProject ? (
-            <>
-              <h2>{selectedProject.title}</h2>
-              <p>{selectedProject.description}</p>
-              <a href={selectedProject.url} target="_blank" rel="noopener noreferrer" style={{ color: "#61dafb", fontWeight: "bold" }}>
-                View Project →
-              </a>
-            </>
-          ) : (
-            <>
-              <h2>My Projects</h2>
-              <p>Explore my projects by clicking the rotating cards on the left. Each card will take you directly to the live project or repository.</p>
-            </>
-          )}
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="w-full lg:w-3/5 h-[400px] md:h-[600px] relative cursor-grab active:cursor-grabbing">
+            <Canvas
+              camera={{ position: [0, 0, 10], fov: 40 }}
+              dpr={[1, 2]}
+            >
+              <Suspense fallback={null}>
+                <ambientLight intensity={0.5} />
+                <directionalLight position={[10, 10, 5]} intensity={1.5} />
+                <ProjectCylinder 
+                  projects={projects} 
+                  onSelect={setSelectedProject} 
+                  selectedProject={selectedProject}
+                />  
+                <OrbitControls 
+                  enableZoom={false} 
+                  enablePan={false} 
+                  minPolarAngle={Math.PI/2.2} 
+                  maxPolarAngle={Math.PI/1.8}
+                />
+                <EffectComposer>
+                  <Bloom intensity={0.5} luminanceThreshold={0.5} />
+                </EffectComposer>
+              </Suspense>
+            </Canvas>
+          </div>
+
+          <div className="w-full lg:w-2/5 min-h-[300px] flex items-center">
+            <AnimatePresence mode="wait">
+              {selectedProject ? (
+                <motion.div
+                  key={selectedProject.title}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[32px] p-8 md:p-10 shadow-2xl w-full"
+                >
+                  <div className="flex gap-2 mb-4">
+                    {selectedProject.tags.map(tag => (
+                      <span key={tag} className="px-3 py-1 bg-sky-400/10 text-sky-400 rounded-full text-xs font-mono uppercase">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <h3 className="text-3xl font-bold text-white mb-4">{selectedProject.title}</h3>
+                  <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+                    {selectedProject.description}
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <a 
+                      href={selectedProject.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="btn-primary flex items-center gap-2"
+                    >
+                      View Live Project
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </a>
+                    <button 
+                      onClick={() => setSelectedProject(null)}
+                      className="btn-secondary"
+                    >
+                      Back to Gallery
+                    </button>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center lg:text-left px-4"
+                >
+                  <div className="mb-6 inline-flex p-4 rounded-3xl bg-white/5 border border-white/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-semibold mb-4 text-white">Select a Project</h3>
+                  <p className="text-gray-400 text-lg">
+                    Interact with the 3D gallery on the left to learn more about my individual contributions and technical implementations.
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>

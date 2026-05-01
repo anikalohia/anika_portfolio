@@ -33,20 +33,20 @@ export default function About() {
           transition={{ duration: 0.8 }}
           className="w-full max-w-4xl"
         >
-          <div className="flex flex-col md:flex-row items-center gap-12 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[40px] p-8 md:p-16 shadow-2xl">
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[32px] md:rounded-[40px] p-6 md:p-16 shadow-2xl">
             {/* Visual element or placeholder for profile/icon */}
-            <div className="w-48 h-48 md:w-64 md:h-64 shrink-0 rounded-3xl overflow-hidden bg-gradient-to-br from-sky-400 to-indigo-600 p-1">
+            <div className="w-32 h-32 md:w-64 md:h-64 shrink-0 rounded-3xl overflow-hidden bg-gradient-to-br from-sky-400 to-indigo-600 p-1">
               <div className="w-full h-full bg-[#030712] rounded-[22px] flex items-center justify-center">
-                <span className="text-6xl">👋</span>
+                <span className="text-4xl md:text-6xl">👋</span>
               </div>
             </div>
 
-            <div className="flex-1">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+            <div className="flex-1 text-center md:text-left">
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6 tracking-tight">
                 About Me
               </h2>
               
-              <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
+              <div className="space-y-4 text-gray-300 text-base md:text-lg leading-relaxed">
                 <p>
                   Hey there! I’m <span className="text-sky-400 font-semibold">Anika</span>, a developer who loves building cool things with code and an aspiring AI engineer exploring the future of intelligent systems.
                 </p>

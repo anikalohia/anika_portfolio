@@ -64,12 +64,18 @@ body {
 
 section {
   min-height: 100vh;
-  padding: 6rem 2rem;
+  padding: 6rem 4rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 4rem 1.5rem;
+  }
 }
 
 /* Navbar styles */

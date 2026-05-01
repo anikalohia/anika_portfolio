@@ -127,15 +127,15 @@ export default function Project() {
   return (
     <section id="projects" className="min-h-screen py-24 flex flex-col items-center justify-center overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Featured <span className="text-sky-400">Works</span>
           </h2>
-          <p className="text-gray-400">Click and drag to explore the 3D gallery. Tap a card to see details.</p>
+          <p className="text-gray-400 text-sm md:text-base">Click and drag to explore the 3D gallery. Tap a card to see details.</p>
         </div>
 
-        <div className="flex flex-col lg:flex-row items-center gap-12">
-          <div className="w-full lg:w-3/5 h-[400px] md:h-[600px] relative cursor-grab active:cursor-grabbing">
+        <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12">
+          <div className="w-full lg:w-3/5 h-[300px] md:h-[600px] relative cursor-grab active:cursor-grabbing">
             <Canvas
               camera={{ position: [0, 0, 10], fov: 40 }}
               dpr={[1, 2]}
@@ -161,7 +161,7 @@ export default function Project() {
             </Canvas>
           </div>
 
-          <div className="w-full lg:w-2/5 min-h-[300px] flex items-center">
+          <div className="w-full lg:w-2/5 min-h-[250px] md:min-h-[300px] flex items-center">
             <AnimatePresence mode="wait">
               {selectedProject ? (
                 <motion.div
@@ -169,34 +169,34 @@ export default function Project() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[32px] p-8 md:p-10 shadow-2xl w-full"
+                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl md:rounded-[32px] p-6 md:p-10 shadow-2xl w-full"
                 >
-                  <div className="flex gap-2 mb-4">
+                  <div className="flex gap-2 mb-3 md:mb-4">
                     {selectedProject.tags.map(tag => (
-                      <span key={tag} className="px-3 py-1 bg-sky-400/10 text-sky-400 rounded-full text-xs font-mono uppercase">
+                      <span key={tag} className="px-2 md:px-3 py-1 bg-sky-400/10 text-sky-400 rounded-full text-[10px] md:text-xs font-mono uppercase">
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <h3 className="text-3xl font-bold text-white mb-4">{selectedProject.title}</h3>
-                  <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4">{selectedProject.title}</h3>
+                  <p className="text-gray-400 text-base md:text-lg mb-6 md:mb-8 leading-relaxed">
                     {selectedProject.description}
                   </p>
-                  <div className="flex flex-wrap gap-4">
+                  <div className="flex flex-wrap gap-3 md:gap-4">
                     <a 
                       href={selectedProject.url} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="btn-primary flex items-center gap-2"
+                      className="btn-primary text-sm md:text-base flex items-center gap-2 py-2.5 px-5"
                     >
-                      View Live Project
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                      View Project
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                     </a>
                     <button 
                       onClick={() => setSelectedProject(null)}
-                      className="btn-secondary"
+                      className="btn-secondary text-sm md:text-base py-2.5 px-5"
                     >
-                      Back to Gallery
+                      Back
                     </button>
                   </div>
                 </motion.div>
@@ -204,16 +204,16 @@ export default function Project() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="text-center lg:text-left px-4"
+                  className="text-center lg:text-left px-4 w-full"
                 >
-                  <div className="mb-6 inline-flex p-4 rounded-3xl bg-white/5 border border-white/10">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="mb-4 md:mb-6 inline-flex p-3 md:p-4 rounded-2xl md:rounded-3xl bg-white/5 border border-white/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 md:w-8 md:h-8 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-semibold mb-4 text-white">Select a Project</h3>
-                  <p className="text-gray-400 text-lg">
-                    Interact with the 3D gallery on the left to learn more about my individual contributions and technical implementations.
+                  <h3 className="text-xl md:text-2xl font-semibold mb-2 md:mb-4 text-white">Select a Project</h3>
+                  <p className="text-gray-400 text-sm md:text-lg">
+                    Interact with the 3D gallery to learn more.
                   </p>
                 </motion.div>
               )}

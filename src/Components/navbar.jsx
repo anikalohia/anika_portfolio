@@ -41,12 +41,12 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full flex justify-center items-center py-6 px-4 z-[1000] transition-all duration-300 ${
-        scrolled ? "py-4" : "py-6"
+      className={`fixed top-0 left-0 w-full flex justify-center items-center py-4 px-4 z-[1000] transition-all duration-300 ${
+        scrolled ? "py-3" : "py-4 md:py-6"
       }`}
     >
       <div
-        className={`flex items-center justify-between px-6 py-3 rounded-2xl border transition-all duration-300 ${
+        className={`flex items-center justify-between px-5 py-2.5 rounded-2xl border transition-all duration-300 ${
           scrolled 
           ? "bg-[#030712]/80 backdrop-blur-xl border-white/10 shadow-2xl w-full max-w-4xl" 
           : "bg-transparent border-transparent w-full max-w-6xl"
@@ -54,7 +54,7 @@ export default function Navbar() {
       >
         <motion.h1 
           id="logo" 
-          className="text-2xl font-bold tracking-tighter"
+          className="text-xl md:text-2xl font-bold tracking-tighter"
           whileHover={{ scale: 1.05 }}
         >
           Anika<span className="text-sky-400">.</span>

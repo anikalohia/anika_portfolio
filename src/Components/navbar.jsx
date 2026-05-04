@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [active, setActive] = useState("hero");
@@ -32,11 +32,12 @@ export default function Navbar() {
   }, [active]);
 
   const navLinks = [
-    { id: "hero", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
-    { id: "contact", label: "Contact" },
+    { id: "hero", label: "Start" },
+    { id: "about", label: "Human" },
+    { id: "skills", label: "Solved" },
+    { id: "projects", label: "Built" },
+    { id: "next", label: "Next" },
+    { id: "contact", label: "Connect" },
   ];
 
   return (
@@ -52,13 +53,13 @@ export default function Navbar() {
           : "bg-transparent border-transparent w-full max-w-6xl"
         }`}
       >
-        <motion.h1 
+        <Motion.h1 
           id="logo" 
           className="text-xl md:text-2xl font-bold tracking-tighter"
           whileHover={{ scale: 1.05 }}
         >
           Anika<span className="text-sky-400">.</span>
-        </motion.h1>
+        </Motion.h1>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-2">
@@ -66,9 +67,9 @@ export default function Navbar() {
             <a
               key={link.id}
               href={`#${link.id}`}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 hand-underline ${
                 active === link.id 
-                ? "text-sky-400 bg-sky-400/10" 
+                ? "text-sky-400 bg-sky-400/10 active" 
                 : "text-gray-400 hover:text-white hover:bg-white/5"
               }`}
             >
@@ -93,7 +94,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -113,7 +114,7 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-          </motion.div>
+          </Motion.div>
         )}
       </AnimatePresence>
     </nav>

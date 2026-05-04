@@ -5,7 +5,6 @@ import * as THREE from 'three'
 
 function Particles({ count = 100 }) {
   const mesh = useRef()
-  const light = useRef()
 
   const particles = useMemo(() => {
     const temp = []

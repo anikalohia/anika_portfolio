@@ -2,7 +2,7 @@ import React from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Float, MeshDistortMaterial } from "@react-three/drei";
 import Model from "./mush";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { Typewriter } from 'react-simple-typewriter';
 
 export default function Hero() {
@@ -14,7 +14,7 @@ export default function Hero() {
 
       <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-8 md:gap-12 items-center z-10">
         <div className="hero-content text-center lg:text-left mt-16 md:mt-0">
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -22,7 +22,7 @@ export default function Hero() {
             <h2 className="text-sky-400 font-medium tracking-widest uppercase mb-3 text-xs md:text-sm">
               Available for new opportunities
             </h2>
-            <motion.h1
+            <Motion.h1
               id="name"
               className="text-white font-bold leading-tight mb-4 md:mb-6"
               initial={{ opacity: 0, x: -50 }}
@@ -30,7 +30,7 @@ export default function Hero() {
               transition={{ delay: 0.2, duration: 0.8 }}
             >
               Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-400">Anika</span>
-            </motion.h1>
+            </Motion.h1>
             
             <h3 id="head" className="text-xl md:text-4xl text-gray-300 font-light mb-6 md:mb-8">
               Software Developer <span className="text-sky-400">|</span> AI Enthusiast
@@ -52,8 +52,8 @@ export default function Hero() {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
-              <motion.a 
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start relative">
+              <Motion.a 
                 href="#projects" 
                 className="btn-primary text-sm md:text-base flex items-center justify-center gap-2 py-3 px-8"
                 whileHover={{ scale: 1.05 }}
@@ -61,17 +61,25 @@ export default function Hero() {
               >
                 Explore Projects
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-              </motion.a>
-              <motion.a 
-                href="#contact" 
-                className="btn-secondary text-sm md:text-base flex items-center justify-center py-3 px-8"
+              </Motion.a>
+              <Motion.a 
+                href="#" /* Replace with your actual resume link or path */
+                className="btn-secondary text-sm md:text-base flex items-center justify-center gap-2 py-3 px-8 relative"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
+                Resume
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              </Motion.a>
+              <Motion.a 
+                href="#contact" 
+                className="text-gray-400 hover:text-white transition-colors text-sm md:text-base flex items-center justify-center py-3 px-2 font-medium"
+                whileHover={{ x: 5 }}
+              >
                 Get in Touch
-              </motion.a>
+              </Motion.a>
             </div>
-          </motion.div>
+          </Motion.div>
         </div>
 
         <div className="hero-model relative h-[300px] md:h-[600px] w-full">
@@ -95,7 +103,7 @@ export default function Hero() {
           </Canvas>
           
           {/* Floating badge for mobile/desktop */}
-          <motion.div 
+          <Motion.div 
             className="absolute bottom-10 right-10 bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-2xl hidden md:block"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -103,7 +111,7 @@ export default function Hero() {
           >
             <p className="text-xs text-gray-400 uppercase tracking-tighter mb-1">Based in</p>
             <p className="text-sm font-semibold">India 🇮🇳</p>
-          </motion.div>
+          </Motion.div>
         </div>
       </div>
     </section>

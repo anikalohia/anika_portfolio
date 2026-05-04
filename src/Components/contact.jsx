@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
 export default function Contact() {
   const [errors, setErrors] = useState({ name: "", email: "", message: "" });
@@ -45,28 +45,61 @@ export default function Contact() {
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-sky-500/5 rounded-full blur-[150px] -z-10" />
 
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-12 md:mb-16">
-          <motion.h2 
+        <div className="text-center mb-12 md:mb-16 relative">
+          <Motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-bold mb-4"
           >
-            Get In <span className="text-sky-400">Touch</span>
-          </motion.h2>
+            Let’s <span className="text-sky-400">build something</span>
+          </Motion.h2>
+
+          {/* Chaotic but Smart: Paper Plane Doodle */}
+          <Motion.div
+            initial={{ opacity: 0, x: -20, y: 20 }}
+            whileInView={{ opacity: 0.4, x: 0, y: 0 }}
+            className="absolute -top-6 right-0 md:right-1/4 hidden md:block text-sky-400/40 rotate-12"
+          >
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+            </svg>
+            <p className="font-logo text-[8px] -mt-2">Sending thoughts...</p>
+          </Motion.div>
+
           <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base px-4">
-            Have a project in mind or just want to chat? I'm always open to discussing new opportunities and ideas.
+            Whether it's a technical challenge or a creative collaboration, my inbox is always open.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8 md:gap-12 items-start">
           {/* Info Side */}
-          <motion.div 
+          <Motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-2 space-y-6 md:space-y-8"
+            className="lg:col-span-2 space-y-6 md:space-y-8 relative"
           >
+            {/* Chaotic but Smart: Sticky Note CTA */}
+            <Motion.div
+              drag
+              dragConstraints={{ left: -20, right: 20, top: -20, bottom: 20 }}
+              className="absolute -top-24 right-0 bg-sky-400 text-gray-900 p-4 rounded-lg shadow-2xl rotate-3 cursor-grab active:cursor-grabbing hidden xl:block w-40 border-b-4 border-sky-600 z-30"
+            >
+              <p className="font-mono text-[10px] leading-tight font-bold">
+                🚀 <b>Status:</b> Ready to tackle your next big challenge. Let's talk!
+              </p>
+            </Motion.div>
+
+            {/* Chaotic but Smart: Floating Thought */}
+            <Motion.div
+              animate={{ rotate: [0, -3, 0] }}
+              transition={{ duration: 5, repeat: Infinity }}
+              className="absolute -top-10 -left-4 bg-indigo-500/10 backdrop-blur-md border border-indigo-400/20 text-indigo-400 p-2 rounded-lg text-[8px] font-mono hidden lg:block"
+            >
+              // Response time: usually &lt; 24h
+            </Motion.div>
+
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl md:rounded-[32px] p-6 md:p-8">
               <h3 className="text-xl md:text-2xl font-bold mb-6 text-white text-center md:text-left">Contact Info</h3>
               
@@ -113,10 +146,10 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </Motion.div>
 
           {/* Form Side */}
-          <motion.div 
+          <Motion.div 
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -175,7 +208,7 @@ export default function Contact() {
                 )}
               </button>
             </form>
-          </motion.div>
+          </Motion.div>
         </div>
       </div>
     </section>

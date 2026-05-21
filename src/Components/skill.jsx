@@ -68,7 +68,7 @@ export default function SkillsSection() {
             className="absolute -top-16 left-0 md:left-20 bg-sky-500/10 backdrop-blur-md border border-sky-400/20 text-sky-400/80 p-3 rounded-2xl rotate-6 cursor-grab active:cursor-grabbing hidden lg:block"
           >
             <p className="font-mono text-[10px] leading-tight flex items-center gap-2">
-              <span>🚀</span> <b>Optimization:</b> I once reduced AI inference time by 40%.
+              <span>🚀</span> <b>Optimization:</b> Built and optimized deep learning models
             </p>
           </Motion.div>
         </div>
@@ -118,22 +118,22 @@ export default function SkillsSection() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { 
-                q: "How to handle 1M+ data points without crashing the browser?", 
-                a: "Shifted from SVG to Canvas rendering in D3.js and implemented virtualization for data streams.",
+                q: "How do you sync changes between multiple users in real time?", 
+                a: "Implemented WebSocket-based communication to instantly reflect document updates across connected users.",
                 tag: "Optimization",
                 color: "bg-[#fef9c3]", // Yellow
                 rotate: "-2deg"
               },
               { 
-                q: "How to ensure privacy in a real-time video app?", 
-                a: "Engineered a custom signaling server with WebRTC and used transient Firebase tokens for session handshakes.",
+                q: "How do you make AI predictions faster and more efficient?", 
+                a: "Optimized deep learning inference pipelines and reduced processing overhead using model optimization techniques.",
                 tag: "Security",
                 color: "bg-[#dcfce7]", // Green
                 rotate: "1deg"
               },
               { 
-                q: "How to reduce AI inference time for edge devices?", 
-                a: "Quantized TensorFlow models and used FastAPI's async pools to handle concurrent prediction requests.",
+                q: "How do you handle multiple API requests efficiently?", 
+                a: "Built asynchronous backend workflows using FastAPI to improve concurrent request handling and responsiveness.",
                 tag: "Performance",
                 color: "bg-[#C5F0FF]", // Blue
                 rotate: "-1.5deg"

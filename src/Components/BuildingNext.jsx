@@ -4,22 +4,31 @@ import { motion as Motion } from "framer-motion";
 export default function BuildingNext() {
   const nextProjects = [
     {
-      title: "AI-Powered Career Roadmap",
-      description: "A tool that analyzes your current skills and creates a personalized learning path to reach your dream role.",
+      title: "AI Interviewer",
+      description: "An AI-powered interview platform that analyzes resumes and skills to generate personalized mock interviews, helping users improve communication, confidence, and job readiness.",
       status: "In Research",
       icon: "🗺️"
     },
     {
-      title: "Sustainable Tech Directory",
-      description: "A platform to find and contribute to eco-friendly software projects and hardware alternatives.",
-      status: "Prototyping",
-      icon: "🌱"
+      title: "Currently Exploring",
+      description: [
+        "Conversational AI",
+        "Real-time collaboration systems",
+        "FastAPI performance optimization",
+        "Human-centered AI experiences",
+        "Semantic search & vector databases"
+      ],
+      status: "Learning & Experimenting",
+      icon: "🔍"
     }
   ];
 
   return (
     <section id="next" className="py-24 px-6 relative overflow-hidden bg-white/5 backdrop-blur-sm border-y border-white/5">
-      {/* Background Decorative */}
+      {/* Background Decorative: Subtle Grid */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+      
+      {/* Background Decorative: Glow */}
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-sky-500/5 rounded-full blur-[100px] -z-10" />
 
       <div className="max-w-7xl mx-auto">
@@ -50,7 +59,7 @@ export default function BuildingNext() {
             className="absolute top-0 left-0 bg-emerald-100/80 text-gray-800 p-4 rounded-lg shadow-lg -rotate-3 cursor-grab active:cursor-grabbing z-20 hidden lg:block w-44 border-b-2 border-emerald-300"
           >
             <p className="font-mono text-[10px] leading-tight">
-              🛠️ <b>Dev Log:</b> Currently obsessed with reducing latency in RAG pipelines.
+              🛠️ <b>Dev Log:</b> Exploring how AI can improve confidence and communication during interviews.
             </p>
           </Motion.div>
         </div>
@@ -62,16 +71,32 @@ export default function BuildingNext() {
               initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white/5 border border-white/10 rounded-[32px] p-8 relative group hover:bg-white/[0.08] transition-colors"
+              className="bg-white/5 border border-white/10 rounded-[32px] p-8 relative group hover:bg-white/[0.08] transition-colors h-full flex flex-col"
             >
               <div className="text-4xl mb-4">{project.icon}</div>
               <div className="absolute top-8 right-8 px-3 py-1 rounded-full bg-sky-400/10 text-sky-400 text-[10px] font-bold uppercase tracking-widest">
                 {project.status}
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">{project.title}</h3>
-              <p className="text-gray-400 leading-relaxed mb-0">
-                {project.description}
-              </p>
+              <h3 className="text-2xl font-bold text-white mb-4">{project.title}</h3>
+              
+              <div className="flex-grow">
+                {Array.isArray(project.description) ? (
+                  <div className="relative pl-4 border-l border-white/10 space-y-4 my-2">
+                    {project.description.map((item, i) => (
+                      <div key={i} className="relative">
+                        <div className="absolute -left-[21px] top-2 w-2 h-2 rounded-full bg-sky-400/40 border border-sky-400/20 shadow-[0_0_8px_rgba(56,189,248,0.3)]" />
+                        <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+                          {item}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-gray-400 leading-relaxed text-sm md:text-base">
+                    {project.description}
+                  </p>
+                )}
+              </div>
               
               {/* Static Thoughts for cleaner look */}
               {index === 0 ? (
@@ -80,7 +105,7 @@ export default function BuildingNext() {
                 </div>
               ) : (
                 <div className="absolute -bottom-4 -right-4 bg-emerald-500/80 text-white px-3 py-1.5 rounded-xl text-[10px] font-medium shadow-md opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                  💭 Researching green cloud APIs...
+                  💭 Optimizing FastAPI endpoints...
                 </div>
               )}
             </Motion.div>

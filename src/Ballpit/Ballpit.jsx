@@ -742,8 +742,28 @@ const Ballpit = ({ className = '', followCursor = true, ...props }) => {
         spheresInstanceRef.current.dispose();
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Handle dynamic updates
+  useEffect(() => {
+    if (spheresInstanceRef.current) {
+      const spheres = spheresInstanceRef.current.spheres;
+      if (spheres) {
+        // Update physics config
+        Object.assign(spheres.config, props);
+        
+        // If count changed, we need to re-initialize (setCount handles this)
+        if (props.count !== undefined && props.count !== spheres.count) {
+          spheresInstanceRef.current.setCount(props.count);
+        }
+        
+        // If colors changed, update them
+        if (props.colors) {
+          spheres.setColors(props.colors);
+        }
+      }
+    }
+  }, [props]);
 
   return (
     <canvas

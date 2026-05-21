@@ -44,13 +44,16 @@ export default function About({ onSecretClick, isEasterEggActive }) {
               
               <div className="space-y-4 text-gray-300 text-base md:text-lg leading-relaxed relative">
                 <p>
-                  Hey there! I’m <span className={`font-semibold transition-colors duration-500 ${isEasterEggActive ? 'text-sky-400 easter-egg-active' : 'text-sky-400'}`}>Anika</span>, a developer who loves building cool things with code and an aspiring AI engineer exploring the future of intelligent systems.
+                  Hi, I’m <span onClick={onSecretClick} className={`font-semibold cursor-pointer transition-colors duration-500 ${isEasterEggActive ? 'text-sky-400 easter-egg-active' : 'text-sky-400'}`}>Anika</span> — a Full-Stack Developer and AI enthusiast passionate about building intelligent, user-focused digital products.
                 </p>
                 <p>
-                  I enjoy crafting apps that are both useful and delightful, solving tough coding challenges, and experimenting with how AI can make tech feel more human.
+                  I build scalable web applications and explore how AI can create more natural, human-centered experiences. From real-time collaborative platforms to AI-powered learning tools, I enjoy solving meaningful problems through clean engineering and thoughtful design.
                 </p>
                 <p>
-                  For me, code isn’t just about logic—it’s about <span className="text-white italic">creating experiences</span> that matter and making a positive impact through technology.
+                  Currently focused on full-stack development, machine learning, and building products that bridge technology with real-world impact.
+                </p>
+                <p>
+                  Beyond development, I enjoy creating content and exploring storytelling through digital media and design.
                 </p>
               </div>
 
@@ -69,7 +72,7 @@ export default function About({ onSecretClick, isEasterEggActive }) {
               {/* Personality Section */}
               <div className="mt-12 pt-8 border-t border-white/5">
                 <h3 className="text-xl md:text-2xl font-semibold text-white mb-6">
-                  When I’m not building, I’m probably...
+                  Off-screen, you’ll probably find me…
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {[

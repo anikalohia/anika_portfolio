@@ -30,7 +30,7 @@ export default function LandingPage() {
       
       <Hero />
       <About onSecretClick={handleSecretClick} isEasterEggActive={isEasterEggActive} />
-      <Skill/>
+      <Skill />
       <Project />
       <BuildingNext />
       

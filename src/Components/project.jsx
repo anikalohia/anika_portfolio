@@ -481,6 +481,5 @@ export default function Project() {
         )}
       </AnimatePresence>
     </section>
-
-);
+  );
 }
